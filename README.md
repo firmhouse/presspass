@@ -25,7 +25,7 @@ Full example to run WordPress through Pow with a PHP version that is installed u
 
 ``` bash
 cd Code;
-presspass new my_blog --php /usr/local/bin/php
+presspass new my_blog --php /usr/local/bin/php-cgi
 
 gem install rack rack-legacy rack-rewrite
 ln -s ~/Code/my_blog ~/.pow/my_blog
