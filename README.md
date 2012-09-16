@@ -41,7 +41,11 @@ ln -s ~/Code/my_blog ~/.pow/my_blog
 open http://myblog.dev/
 ```
 
-## Developing Themes with PressPass
+## Theme Development Setup
 
 Please read [DEVELOPING_THEMES.md](http://github.com/firmhouse/presspass/blob/master/DEVELOPING_THEMES.md) to
 learn how you can hook PressPass into your theme development workflow and be awesome.
+
+## Having problems?
+
+Are you having problems? Please open an issue at https://github.com/firmhouse/presspass/issues.
