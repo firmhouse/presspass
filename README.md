@@ -35,5 +35,5 @@ open http://myblog.dev/
 
 ## Developing Themes with PressPass
 
-Please read [DEVELOPING_THEMES.md](http://github.com/firmhouse/presspass/blog/master/DEVELOPING_THEMES.md) to
+Please read [DEVELOPING_THEMES.md](http://github.com/firmhouse/presspass/blob/master/DEVELOPING_THEMES.md) to
 learn how you can hook PressPass into your theme development workflow and be awesome.
