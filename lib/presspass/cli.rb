@@ -6,10 +6,12 @@ require 'presspass'
 require 'presspass/cli/new_project_generator'
 
 if ARGV.first == "new"
-  app_name = ARGV[1]
-  ARGV.shift(2)
+  ARGV.shift
 
-  generator = PressPass::Cli::NewProjectGenerator.new(app_name)
+  if ARGV.first.nil?
+    ARGV << "--help"
+  end
+
+  generator = PressPass::Cli::NewProjectGenerator.new
   generator.run
-
 end

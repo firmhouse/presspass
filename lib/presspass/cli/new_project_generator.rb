@@ -5,30 +5,30 @@ module PressPass
 
     class NewProjectGenerator
 
-      def initialize(app_name)
-        @app_name = app_name
-      end
+      def initialize
+        @options = {:php => nil}
 
-      def run
-        app_name = @app_name
-
-        options = {:php => nil}
+        @app_name = ARGV.first
 
         OptionParser.new do |opts|
           opts.banner = "Usage: presspass new <app_name> [options]"
 
-          opts.on("--php [OPTIONAL]", "Path to PHP CGI binary") do |php_path|
-            options[:php] = php_path
+          opts.on("--php PATH", "Path to PHP CGI binary") do |php_path|
+            @options[:php] = php_path
           end
-        end.parse!
 
+        end.parse!(ARGV)
+
+      end
+
+      def run
         create_project_directory
 
         download_wordpress
 
         extract_wordpress_into_project_directory
 
-        add_rack_config(:php_cgi_path => options[:php])
+        add_rack_config(:php_cgi_path => @options[:php])
 
         puts "WordPress installation created at #{@app_name}."
       end
@@ -38,7 +38,7 @@ module PressPass
       def create_project_directory
         if Dir.exists?(@app_name)
           puts "A directory with name #{@app_name} already exists."
-          return
+          exit 1
         end
       end
 
