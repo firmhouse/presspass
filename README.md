@@ -24,7 +24,7 @@ presspass new <app_name> --php /usr/local/bin/php
 Full example to run WordPress through Pow with a PHP version that is installed using Homebrew:
 
 ``` bash
-cd Code;
+cd Code
 presspass new my_blog --php /usr/local/bin/php-cgi
 
 gem install rack rack-legacy rack-rewrite

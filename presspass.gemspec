@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'presspass'
-  s.version = '0.0.1'
+  s.version = '0.0.2'
   s.date = '2012-09-15'
   s.summary = 'PressPass'
   s.description = 'PressPass makes doing WordPress development awesome'
