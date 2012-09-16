@@ -2,6 +2,14 @@
 
 Generate WordPress installations, themes and plugins. Generally making WordPress development awesome.
 
+## Installing
+
+PressPass is available as a gem:
+
+```
+gem install presspass
+```
+
 ## Usage
 
 To generate a new installation of WordPress:
