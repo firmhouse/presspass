@@ -1,4 +1,4 @@
-class PressPass
+module PressPass
 
   WORDPRESS_VERSION = "3.4.2"
 

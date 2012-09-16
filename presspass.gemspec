@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = 'PressPass makes doing WordPress development awesome'
   s.authors = ['Michiel Sikkes']
   s.email = 'michiel@firmhouse.com'
-  s.files = ['lib/presspass.rb', 'lib/presspass/presspass.rb', 'lib/presspass/cli.rb']
+  s.files = ['lib/presspass.rb', 'lib/presspass/presspass.rb', 'lib/presspass/cli.rb', 'lib/presspass/cli/new_project_generator.rb']
   s.homepage = 'http://github.com/firmhouse/presspass'
   s.executables << 'presspass'
 end
