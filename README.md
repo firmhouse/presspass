@@ -41,6 +41,15 @@ ln -s ~/Code/my_blog ~/.pow/my_blog
 open http://myblog.dev/
 ```
 
+### Pow and RVM
+
+If you are using RVM. You need to add a .rvmrc like the following example inside the generated WordPress
+installation directory:
+
+```
+rvm 1.9.3
+```
+
 ## Theme Development Setup
 
 Please read [DEVELOPING_THEMES.md](http://github.com/firmhouse/presspass/blob/master/DEVELOPING_THEMES.md) to
