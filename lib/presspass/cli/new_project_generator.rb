@@ -5,13 +5,13 @@ module PressPass
 
     class NewProjectGenerator
 
-      def initialize
+      def initialize(command = "new")
         @options = {:php => nil}
 
         @app_name = ARGV.first
 
         OptionParser.new do |opts|
-          opts.banner = "Usage: presspass new <app_name> [options]"
+          opts.banner = "Usage: presspass #{command} <app_name> [options]"
 
           opts.on("--php PATH", "Path to PHP CGI binary") do |php_path|
             @options[:php] = php_path
@@ -28,12 +28,31 @@ module PressPass
 
         extract_wordpress_into_project_directory
 
-        add_rack_config(:php_cgi_path => @options[:php])
+        init
 
         puts "WordPress installation created at #{@app_name}."
       end
 
+      def init
+        add_rack_config(:php_cgi_path => @options[:php])
+
+        set_default_config
+      end
+
       private
+
+      def set_default_config
+
+        config_file = File.join(Dir.home, '.presspass.yml')
+
+        config = {}
+        config["installation_dir"] = File.expand_path(@app_name)
+
+        File.open( config_file, "w+") do |file|
+          file.write(YAML.dump(config))
+        end
+
+      end
 
       def create_project_directory
         if Dir.exists?(@app_name)

@@ -15,6 +15,15 @@ if ARGV.first == "new"
 
   generator = PressPass::Cli::NewProjectGenerator.new
   generator.run
+elsif ARGV.first == "init"
+  ARGV.shift
+
+  if ARGV.first.nil?
+    ARGV << "--help"
+  end
+
+  generator = PressPass::Cli::NewProjectGenerator.new
+  generator.init
 elsif ARGV.first == "link"
   ARGV.shift
 
