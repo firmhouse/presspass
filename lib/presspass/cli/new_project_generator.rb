@@ -43,7 +43,7 @@ module PressPass
 
       def set_default_config
 
-        config_file = File.join(Dir.home, '.presspass.yml')
+        config_file = File.join(File.expand_path('~'), '.presspass.yml')
 
         config = {}
         config["installation_dir"] = File.expand_path(@app_name)
@@ -55,8 +55,8 @@ module PressPass
       end
 
       def create_project_directory
-        if Dir.exists?(@app_name)
-          puts "A directory with name #{@app_name} already exists."
+        if File.exist?(@app_name)
+          puts "A file or directory with name #{@app_name} already exists."
           exit 1
         end
       end
