@@ -6,7 +6,7 @@ PressPass helps you develop WordPress themes in a convenient way.
 
 ## Create your local WordPress installation
 
-With the instructions from the [README](http://github.com/firmhouse/presspass/blob/master/README.md], create a clean WordPress installation and configure it through 
+With the instructions from the [README](http://github.com/firmhouse/presspass/blob/master/README.md), create a clean WordPress installation and configure it through 
 the WordPress installer. In this example ```Code``` is the directory where we store all our projects.
 
 ``` bash
