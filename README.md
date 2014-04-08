@@ -23,7 +23,7 @@ This will download the latest version of WordPress and install it into the <app_
 ## Using with Pow
 
 The ```new``` command will generate a ```config.ru``` file in the installation directory so you can run your WordPress installation with [Pow](http://pow.cx). This will use a php-cgi installation on your system which defaults
-to ```/usr/bin/php-cgi```. To set another path, use the ```--php``` flag:
+to ```/usr/bin/php```. To set another path, use the ```--php``` flag:
 
 ```
 presspass new <app_name> --php /usr/local/bin/php
@@ -33,21 +33,23 @@ Full example to run WordPress through Pow with a PHP version that is installed u
 
 ``` bash
 cd Code
-presspass new my_blog --php /usr/local/bin/php-cgi
+presspass new my_blog
 
 gem install rack rack-legacy rack-rewrite
-ln -s ~/Code/my_blog ~/.pow/my_blog
+echo "9292" > ~/.pow/my_blog
+
+cd ~/Code/my_blog
+rackup
 
 open http://myblog.dev/
 ```
 
-### Pow and RVM
+### Pow and rbenv / RVM
 
-If you are using RVM. You need to add a .rvmrc like the following example inside the generated WordPress
-installation directory:
+If you are using rbenv or RVM. You need to add a .ruby-version like the following example inside the generated WordPress installation directory:
 
 ```
-rvm 1.9.3
+2.1.0
 ```
 
 ## Theme Development Setup

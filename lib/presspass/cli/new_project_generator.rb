@@ -6,15 +6,15 @@ module PressPass
     class NewProjectGenerator
 
       def initialize(command = "new")
-        @options = {:php => nil}
+        @options = {:path_to_php => nil}
 
         @app_name = ARGV.first
 
         OptionParser.new do |opts|
           opts.banner = "Usage: presspass #{command} <app_name> [options]"
 
-          opts.on("--php PATH", "Path to PHP CGI binary") do |php_path|
-            @options[:php] = php_path
+          opts.on("--php PATH", "Path to PHP binary") do |php_path|
+            @options[:path_to_php] = php_path
           end
 
         end.parse!(ARGV)
@@ -34,7 +34,7 @@ module PressPass
       end
 
       def init
-        add_rack_config(:php_cgi_path => @options[:php])
+        add_rack_config(:path_to_php => @options[:path_to_php])
 
         set_default_config
       end
@@ -89,25 +89,21 @@ module PressPass
       end
 
       def add_rack_config(opts = {})
-        options = { :php_cgi_path => nil }
+        options = { :path_to_php => nil }
         options.merge!(opts)
 
         config_ru = <<EOF
 require 'rack'
 require 'rack-legacy'
-require 'rack-rewrite'
 
-INDEXES = ['index.html','index.php', 'index.cgi']
-
-ENV['SERVER_PROTOCOL'] = "HTTP/1.1"
-
-use Rack::Legacy::Php, Dir.getwd<% if options[:php_cgi_path] %>, '<%= options[:php_cgi_path] %>' <% end %>
+use Rack::Legacy::Index
+use Rack::Legacy::Php<% if options[:path_to_php] %>, '<%= options[:path_to_php] %>' <% end %>
 run Rack::File.new Dir.getwd
 EOF
         config_ru_template = ERB.new(config_ru)
 
         puts "Adding config.ru for usage with Pow."
-    
+
         File.open(File.join(@app_name, "config.ru"), "w") do |file|
           file.write(config_ru_template.result(binding))
         end
