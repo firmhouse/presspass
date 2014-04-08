@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'rack'
   s.add_runtime_dependency 'rack-legacy'
-  s.add_runtime_dependency 'rack-rewrite'
 
   s.description = <<-EOF
     PressPass is a command-line tool that helps you do WordPress development.
@@ -29,13 +28,13 @@ Gem::Specification.new do |s|
   EOF
 
   s.post_install_message = <<-EOF
-    Thank you for installing PressPass! Now get started with setting up a 
+    Thank you for installing PressPass! Now get started with setting up a
     WordPress installation in your current directory:
 
         presspass new my_blog
 
     If you need help, please create an issue at
       https://github.com/firmhouse/presspass/issues
-      
+
   EOF
 end
