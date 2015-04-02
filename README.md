@@ -23,19 +23,16 @@ This will download the latest version of WordPress and install it into the <app_
 ``` bash
 $ gem install foreman
 $ foreman start
+$ open http://localhost:8000
 ```
 
-Full example to run WordPress through Pow with a PHP version that is installed using Homebrew:
+## Serve your WordPress environment with Pow
 
-``` bash
-$ cd Code
-$ presspass new my_blog
+To serve your WordPress development environment using Pow and have nice local development domain names, add a symlink to port 8000:
 
-$ echo "8000" > ~/.pow/my_blog
-
-$ gem install foreman
-$ foreman start
-
+```
+$ cd ~/.pow
+$ echo "8000" > ~/myblog
 $ open http://myblog.dev/
 ```
 
