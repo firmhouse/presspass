@@ -31,8 +31,7 @@ $ open http://localhost:8000
 To serve your WordPress development environment using Pow and have nice local development domain names, add a symlink to port 8000:
 
 ```
-$ cd ~/.pow
-$ echo "8000" > ~/myblog
+$ echo "8000" > ~/.pow/myblog
 $ open http://myblog.dev/
 ```
 
