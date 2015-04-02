@@ -1,6 +1,6 @@
 # PressPass
 
-Generate WordPress installations, themes and plugins. Generally making WordPress development awesome.
+Making WordPress development as awesome. PressPass is one simple command to download and install a WordPress installation, and start a local webserver to start developing without any extra configuration fuzz.
 
 ## Installing
 
