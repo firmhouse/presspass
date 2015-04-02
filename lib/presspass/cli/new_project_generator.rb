@@ -53,15 +53,13 @@ module PressPass
 
       def download_wordpress
         if !File.exists?("/tmp/wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz")
-          puts "Downloading wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz..."
+          filename = "wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz"
+          puts "Downloading #{filename}..."
 
-          resp = open("https://wordpress.org/wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz")
-          open("/tmp/wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz", 'w') do |file|
-            file.write(resp.read)
-          end
+          `curl -o /tmp/#{filename} https://wordpress.org/#{filename}`
         end
 
-        puts "wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz downloaded."
+        puts "#{filename} downloaded."
       end
 
       def extract_wordpress_into_project_directory
