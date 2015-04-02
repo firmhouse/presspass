@@ -1,4 +1,5 @@
 require 'erb'
+require 'open-uri'
 
 module PressPass
   module Cli
@@ -6,15 +7,15 @@ module PressPass
     class NewProjectGenerator
 
       def initialize(command = "new")
-        @options = {:path_to_php => nil}
+        @options = {:php_port => 8000}
 
         @app_name = ARGV.first
 
         OptionParser.new do |opts|
           opts.banner = "Usage: presspass #{command} <app_name> [options]"
 
-          opts.on("--php PATH", "Path to PHP binary") do |php_path|
-            @options[:path_to_php] = php_path
+          opts.on("--port NUMBER", "Port to run PHP on") do |php_port|
+            @options[:php_port] = php_port
           end
 
         end.parse!(ARGV)
@@ -28,30 +29,19 @@ module PressPass
 
         extract_wordpress_into_project_directory
 
-        init
+        install_foreman(php_port: @options[:php_port])
 
         puts "WordPress installation created at #{@app_name}."
       end
 
-      def init
-        add_rack_config(:path_to_php => @options[:path_to_php])
-
-        set_default_config
-      end
-
       private
 
-      def set_default_config
+      def install_foreman(php_port: 8000)
+        foreman_config = "web: php -S 0.0.0.0:#{php_port}\n"
 
-        config_file = File.join(File.expand_path('~'), '.presspass.yml')
-
-        config = {}
-        config["installation_dir"] = File.expand_path(@app_name)
-
-        File.open( config_file, "w+") do |file|
-          file.write(YAML.dump(config))
+        File.open(File.join(@app_name, "Procfile"), "w+") do |f|
+          f.write(foreman_config)
         end
-
       end
 
       def create_project_directory
@@ -65,11 +55,9 @@ module PressPass
         if !File.exists?("/tmp/wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz")
           puts "Downloading wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz..."
 
-          Net::HTTP.start('wordpress.org') do |http|
-            resp = http.get("/wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz")
-            open("/tmp/wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz", 'w') do |file|
-              file.write(resp.body)
-            end
+          resp = open("https://wordpress.org/wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz")
+          open("/tmp/wordpress-#{PressPass::WORDPRESS_VERSION}.tar.gz", 'w') do |file|
+            file.write(resp.read)
           end
         end
 
@@ -88,26 +76,6 @@ module PressPass
         FileUtils.rm_r(tmp_dir)
       end
 
-      def add_rack_config(opts = {})
-        options = { :path_to_php => nil }
-        options.merge!(opts)
-
-        config_ru = <<EOF
-require 'rack'
-require 'rack-legacy'
-
-use Rack::Legacy::Index
-use Rack::Legacy::Php<% if options[:path_to_php] %>, '<%= options[:path_to_php] %>' <% end %>
-run Rack::File.new Dir.getwd
-EOF
-        config_ru_template = ERB.new(config_ru)
-
-        puts "Adding config.ru for usage with Pow."
-
-        File.open(File.join(@app_name, "config.ru"), "w") do |file|
-          file.write(config_ru_template.result(binding))
-        end
-      end
     end
   end
 end

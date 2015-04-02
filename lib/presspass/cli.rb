@@ -4,7 +4,6 @@ require 'optparse'
 
 require 'presspass'
 require 'presspass/cli/new_project_generator'
-require 'presspass/cli/linker'
 
 if ARGV.first == "new"
   ARGV.shift

@@ -18,38 +18,25 @@ To generate a new installation of WordPress:
 presspass new <app_name>
 ```
 
-This will download the latest version of WordPress and install it into the <app_name> directory.
+This will download the latest version of WordPress and install it into the <app_name> directory. It will also generate a `Procfile` that starts a PHP development server of your WordPress installation when you run:
 
-## Using with Pow
-
-The ```new``` command will generate a ```config.ru``` file in the installation directory so you can run your WordPress installation with [Pow](http://pow.cx). This will use a php-cgi installation on your system which defaults
-to ```/usr/bin/php```. To set another path, use the ```--php``` flag:
-
-```
-presspass new <app_name> --php /usr/local/bin/php
+``` bash
+$ gem install foreman
+$ foreman start
 ```
 
 Full example to run WordPress through Pow with a PHP version that is installed using Homebrew:
 
 ``` bash
-cd Code
-presspass new my_blog
+$ cd Code
+$ presspass new my_blog
 
-gem install rack rack-legacy rack-rewrite
-echo "9292" > ~/.pow/my_blog
+$ echo "8000" > ~/.pow/my_blog
 
-cd ~/Code/my_blog
-rackup
+$ gem install foreman
+$ foreman start
 
-open http://myblog.dev/
-```
-
-### Pow and rbenv / RVM
-
-If you are using rbenv or RVM. You need to add a .ruby-version like the following example inside the generated WordPress installation directory:
-
-```
-2.1.0
+$ open http://myblog.dev/
 ```
 
 ## Theme Development Setup
