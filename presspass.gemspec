@@ -8,13 +8,15 @@ Gem::Specification.new do |s|
   s.summary = 'PressPass makes doing WordPress development awesome'
   s.author = 'Michiel Sikkes'
   s.email = 'michiel@firmhouse.com'
-  s.files = ['lib/presspass.rb', 'lib/presspass/presspass.rb', 'lib/presspass/cli.rb', 'lib/presspass/cli/new_project_generator.rb', 'lib/presspass/cli/linker.rb']
+  s.files = [
+    'lib/presspass.rb',
+    'lib/presspass/presspass.rb',
+    'lib/presspass/cli.rb',
+    'lib/presspass/cli/new_project_generator.rb'
+  ]
   s.homepage = 'http://github.com/firmhouse/presspass'
   s.executables << 'presspass'
   s.license = 'MIT'
-
-  s.add_runtime_dependency 'rack'
-  s.add_runtime_dependency 'rack-legacy'
 
   s.description = <<-EOF
     PressPass is a command-line tool that helps you do WordPress development.
@@ -31,7 +33,13 @@ Gem::Specification.new do |s|
     Thank you for installing PressPass! Now get started with setting up a
     WordPress installation in your current directory:
 
-        presspass new my_blog
+        $ presspass new my_blog
+
+    This command will download WordPress and extract it into the *my_blog
+    directory. Then, start a local development server on localhost:8000 with:
+
+        $ foreman start
+        $ open http://localhost:8000
 
     If you need help, please create an issue at
       https://github.com/firmhouse/presspass/issues
