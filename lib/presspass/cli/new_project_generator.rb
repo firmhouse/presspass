@@ -32,6 +32,13 @@ module PressPass
         install_foreman(php_port: @options[:php_port])
 
         puts "WordPress installation created at #{@app_name}."
+        puts "You can now run:"
+        puts
+        puts "    $ gem install foreman"
+        puts "    $ cd #{@app_name}/"
+        puts "    $ foreman start"
+        puts
+        puts "And see your WordPress development environment live at http://localhost:8000!"
       end
 
       private
