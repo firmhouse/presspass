@@ -38,7 +38,7 @@ module PressPass
         puts "    $ cd #{@app_name}/"
         puts "    $ foreman start"
         puts
-        puts "And see your WordPress development environment live at http://localhost:8000!"
+        puts "And access your WordPress site at http://localhost:8000!"
       end
 
       private
